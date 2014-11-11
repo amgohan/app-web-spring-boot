@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.thymeleaf.org">
+	<head th:replace="/layout :: header">
+	<meta charset="UTF-8"/>
+	<title th:text="#{title.application}">Home</title>
+	
+	<link rel="stylesheet" href="../../static/css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="../../static/css/bootstrap-theme.min.css"/>
+	<link rel="stylesheet" href="../../static/css/sticky-footer-navbar.css"/>
+	</head>
+	<body>
+		<div th:replace="/layout :: menu"></div>
+		<div class="container">
+			<div tiles:fragment="content" th:object="${T(com.entreprise.web.utils.ApplicationURIs)}">
+				<div class="page-header">
+					<div class="row">
+						<div class="col-md-10">
+							<h1><span th:text="#{students.page.title}">Students list</span></h1> 
+							(Page : <span th:text="${students.number + 1} + '/' + ${students.totalPages}">1/1</span>)
+						</div>
+						<div class="col-md-2">
+							<a type="button" class="btn btn-success btn-lg" href="#" th:href="@{*{STUDENTS_NEW}}">
+							  <span class="glyphicon glyphicon-user"></span> <span th:text="#{students.new.link.label}">New Student</span>
+							</a>
+						</div>
+					</div>
+				</div>
+				<table class="table">
+				    <thead>
+				        <tr>
+				            <th th:text="#{student.attribute.id}">Id</th>
+				            <th th:text="#{student.attribute.firstName}">First Name</th>
+				            <th th:text="#{student.attribute.lastName}">Last Name</th>
+				            <th th:text="#{student.attribute.email}">Email</th>
+				            <th th:text="#{student.attribute.birthday}">Birthday</th>
+				            <th th:text="#{student.attribute.level}">Level</th>
+				            <th th:text="#{table.header.actions}">Actions</th>
+				        </tr>
+				    </thead>
+				    <tbody>
+				        <tr th:each="student : ${students.content}">
+				            <td th:text="${student.id}">1</td>
+				            <td th:text="${student.firstName}">Amine</td>
+				            <td th:text="${student.lastName}">BOUHAMIDI</td>
+				            <td th:text="${student.email}">amine.bouhamidi@gmail.com</td>
+				            <td th:with="dateFormat=#{global.date.format}" th:text="${#calendars.format(student.birthday, dateFormat)}">1985-07-02</td>
+				            <td th:text="${student.level}">5</td>
+				            <td>
+				            	<a href="#" th:href="@{*{STUDENTS_VIEW} + ${student.id}}" class="btn btn-info" role="button" th:text="#{table.row.actions.view}">View</a>
+       			            	<a href="#" th:href="@{*{STUDENTS_EDIT} + ${student.id}}" class="btn btn-primary" role="button"  th:text="#{table.row.actions.edit}">Edit</a>
+				            </td>
+				        </tr>
+				    </tbody>
+				</table>
+				<!-- Pagination management -->
+				<ul class="pagination" th:if="${students.totalPages > 1}">
+					<!-- First link -->
+					<li th:if="!${students.isFirst()}">
+						<a href="#" th:href="@{*{STUDENTS_LIST}(page=1, pageSize=${pageSize})}" th:text="#{table.pagination.first}">First</a>
+					</li>
+					<!-- Previous link -->
+					<li class="disabled" th:class="${students.hasPrevious()} ? '' : 'disabled'">
+						<a href="#" th:if="${students.hasPrevious()}" th:href="@{''(page=${students.number}, pageSize=${pageSize})}">&laquo;</a>
+						<span th:if="${students.isFirst()}">&laquo;</span>
+					</li>
+					<!-- Pages link -->
+					<li th:each="i : ${#numbers.sequence( 1, students.totalPages)}" th:class="(${i - 1} == ${students.number}) ? 'active' : ''">
+						<a href="#" th:href="@{''(page=${i}, pageSize=${pageSize})}" th:text="${i}">1</a>
+					</li>
+					<!-- Next link -->
+					<li th:class="${students.hasNext()} ? '' : 'disabled'">
+						<a href="#" th:if="${students.hasNext()}" th:href="@{''(page=${students.number + 2}, pageSize=${pageSize})}">&raquo;</a>
+						<span th:if="${students.isLast()}">&raquo;</span>
+					</li>
+					<!-- Last link -->
+					<li th:if="!${students.isLast()}">
+						<a href="#" th:href="@{''(page=${students.totalPages}, pageSize=${pageSize})}" th:text="#{table.pagination.last}">Last</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div th:replace="/layout :: footer">
+			<div id="footer">
+				<div class="container text-center">
+					<p class="text-muted">Footer</p>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="../../static/js/jquery.min.js" th:src="@{/static/js/jquery.min.js}"></script>
+		<script type="text/javascript" src="../../static/js/bootstrap.min.js" th:src="@{/static/js/bootstrap.min.js}"></script>
+	</body>
+</html>

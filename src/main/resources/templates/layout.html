@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org">
+	<head th:fragment="header">
+	<meta charset="UTF-8"/>
+	<title th:text="#{title.application}">Title</title>
+	
+	<link rel="icon" type="image/x-icon" href="../static/favicon.ico" th:src="@{/static/favicon.ico}"/>
+	<link rel="stylesheet" href="../static/css/bootstrap.min.css" th:src="@{/static/css/bootstrap.min.css}"/>
+	<link rel="stylesheet" href="../static/css/bootstrap-theme.min.css"  th:src="@{/static/css/bootstrap-theme.min.css}"/>
+	<link rel="stylesheet" href="../static/css/sticky-footer-navbar.css" th:src="@{/static/css/sticky-footer-navbar.css}"/>
+	</head>
+	<body>
+		<div th:fragment="menu">
+			<div class="navbar navbar-default navbar-fixed-top" role="navigation" th:object="${T(com.entreprise.web.utils.ApplicationURIs)}">
+				<div class="container">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+							<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> 
+							<span class="icon-bar"></span> <span class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" href="#" th:href="@{/}">Entreprise</a>
+					</div>
+					<div class="collapse navbar-collapse">
+						<ul class="nav navbar-nav">
+							<li class="active"><a href="#" th:href="@{/}" th:text="#{menu.home}">Home</a></li>
+							<li class="dropdown">
+								<a href="#" th:text="#{menu.school}">Link1<b class="caret"></b></a>							
+							</li>
+							<li><a href="#" th:href="@{*{STUDENTS_LIST}}" th:text="#{menu.student}">Link2</a></li>
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown" th:text="#{menu.operation}">Opérations<b class="caret"></b></a>
+								<ul class="dropdown-menu">
+									<li><a href="#" th:text="#{link1}">Link1</a></li>
+									<li><a href="#" th:text="#{link2}">Link2</a></li>
+									<li><a href="#" th:text="#{link3}">Link3</a></li>
+								</ul>
+							</li>
+						</ul>
+						<form class="navbar-form navbar-left" role="search">
+							<div class="form-group">
+								<input type="text" class="form-control" placeholder="Search"/>
+							</div>
+							<button type="submit" class="btn btn-default">Submit</button>
+						</form>
+						<ul class="nav navbar-nav navbar-right">
+							<li class="dropdown">
+							  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							  	<span class="glyphicon glyphicon-user"></span>
+							  	<span sec:authentication="name">User</span> <b class="caret"></b>
+							  </a>
+							  <ul class="dropdown-menu" role="menu">
+							  	<li>
+							  		<a href="#">
+							  			<span class="glyphicon glyphicon-wrench"></span>
+							  			<span th:text="#{menu.user.settings}">Settings</span>
+							  		</a>
+							  	</li>
+							  	<li class="divider"></li>
+							  	<li>
+							  		<a href="#" th:href="@{/logout}">
+							  			<span class="glyphicon glyphicon-log-out"></span>
+							  			<span th:text="#{menu.user.quit}">Quit</span>
+							  		</a>
+							  	</li>
+							  </ul>
+							</li>
+						</ul>
+					</div>
+					<!--/.nav-collapse -->
+				</div>
+			</div>
+		</div>
+		<div th:fragment="footer">
+			<div id="footer">
+				<div class="container text-center">
+					<p class="text-muted" th:text="#{footer.copyright}">&#169; Footer</p>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="../static/js/jquery.min.js" th:src="@{/static/js/jquery.min.js}"></script>
+		<script type="text/javascript" src="../static/js/bootstrap.min.js" th:src="@{/static/js/bootstrap.min.js}"></script>
+	</body>
+</html>

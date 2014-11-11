@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8"/>
+		<title th:text="#{title.application}">login.html</title>
+		<link rel="icon" type="image/x-icon" th:src="@{/static/favicon.ico}"/>
+		<link rel="stylesheet" href="../static/css/bootstrap.min.css" th:src="@{/static/css/bootstrap.min.css}"/>
+		<link rel="stylesheet" href="../static/css/bootstrap-theme.min.css" th:src="@{/static/css/bootstrap-theme.min.css}"/>
+		<link rel="stylesheet" href="../static/css/sticky-footer-navbar.css" th:src="@{/static/css/sticky-footer-navbar.css}"/>
+		<link rel="stylesheet" href="../static/css/login.css" th:src="@{/static/css/login.css}"/>
+	</head>
+	<body>
+		<div class="container">
+	      <form class="form-signin" th:action="@{/login}" method="post" role="form">
+	        <h3 class="form-signin-heading" th:text="#{login.form.title}">Authentication</h3>
+	        <input type="text" id="username" name="username" class="form-control" placeholder="Username" th:placeholder="#{login.form.username.placeholder}" required="true" />
+	        <input type="password" id="password" name="password" class="form-control" placeholder="Password" th:placeholder="#{login.form.password.palceholder}" required="true" />
+	        <label class="checkbox">
+	          <input type="checkbox" name="_spring_security_remember_me" /> <span th:text="#{login.form.rememberme}">Remember me</span>
+	        </label>
+
+	        <div th:if="${param.error}" class="alert alert-danger">
+				<span th:text="#{login.form.error}">Invalid username and password.</span>
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+			</div>
+	        <div th:if="${param.logout}" class="alert alert-warning">
+	            <span th:text="#{login.form.logoutmessage}">You have been logged out.</span>
+	            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+	        </div>
+	        <button class="btn btn-lg btn-primary btn-block" type="submit" th:text="#{login.form.submit}">Connection</button>
+	      </form>
+	    </div>
+		<div th:replace="/layout :: footer">
+			<div id="footer">
+				<div class="container text-center">
+					<p class="text-muted">Footer</p>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="../static/js/jquery.min.js" th:src="@{/static/js/jquery.min.js}"></script>
+		<script type="text/javascript" src="../static/js/bootstrap.min.js" th:src="@{/static/js/bootstrap.min.js}"></script>
+	</body>
+</html>

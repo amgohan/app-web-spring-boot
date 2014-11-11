@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="/layout :: header">
+	<meta charset="UTF-8"/>
+	<title>index.html</title>
+	<link rel="icon" type="image/x-icon" href="../static/favicon.ico"/>
+	<link rel="stylesheet" href="../static/css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="../static/css/bootstrap-theme.min.css"/>
+	<link rel="stylesheet" href="../static/css/sticky-footer-navbar.css"/>
+	</head>
+	<body>
+		<div th:replace="/layout :: menu"></div>
+		
+		<div class="container">
+			<h1 th:text="#{hello} + ' ' + ${username}">Hello static content</h1>
+	    </div>
+	    
+		<div th:replace="/layout :: footer">
+			<div id="footer">
+				<div class="container text-center">
+					<p class="text-muted">Footer</p>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="../static/js/jquery.min.js" th:src="@{/static/js/jquery.min.js}"></script>
+		<script type="text/javascript" src="../static/js/bootstrap.min.js" th:src="@{/static/js/bootstrap.min.js}"></script>
+	</body>
+</html>
