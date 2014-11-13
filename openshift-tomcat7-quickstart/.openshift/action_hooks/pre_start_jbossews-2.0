@@ -1,0 +1,2 @@
+echo "newrelic agent configuration"
+export JAVA_OPTS_EXT="-javaagent:${OPENSHIFT_REPO_DIR}/newrelic/newrelic.jar"

@@ -8,8 +8,8 @@
 	<version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
 
-	<name>app-web</name>
-	<description>app-web</description>
+	<name>spring-boot-jpa-mysql</name>
+	<description>spring-boot, jpa, mysql, token based authentication, OpenShift ready</description>
 	<developers>
 		<developer>
 			<name>Sidi Amine BOUHAMIDI</name>
